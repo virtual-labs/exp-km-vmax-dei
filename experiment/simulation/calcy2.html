@@ -2,9 +2,10 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Calculation of pKa value</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Absorbance vs Time Plot</title>
     
-    <!-- Bootstrap CSS -->
+     <!-- Bootstrap CSS -->
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/custom.css">
     
@@ -12,147 +13,157 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation"></script>
-    <style>
+    <style type="text/css">
         .zero {
             margin-top: 5px;
-        }
-        canvas {
-            max-width: 800px;
-            margin: auto;
         }
     </style>
 </head>
 <body>
 
 <div class="row zero">
-    <div id="main"> 
+    <div id="main">
         <div id="myhead">
-            <p id="masteps">Calculation of pKa value</p>
+            <p id="masteps">
+                Absorbance vs Time Plot
+            </p>
         </div>
         <hr>
-        <div class="form-group" style="margin-top: 50px;">
-            <h5>Enter the pH readings (comma-separated):</h5>
-            <input type="text" id="PhVal" class="form-control" placeholder="pH values">
-            <br>
-            <h5>Enter the burette readings (comma-separated, total NaOH added at each step):</h5>
-            <input type="text" id="VolVal" class="form-control" placeholder="Volume values (mL)">
-            <br>
-            <h5>Enter Half Neutralization Point (Volume in mL):</h5>
-            <input type="text" id="HfNPoint" class="form-control" placeholder="Volume value (mL)">
-            <br>
-            <button class="btn btn-success" onclick="plotGraph();">Plot pH vs Volume</button>
+
+        <div class="form-group">
+            <h5 style="text-align: left;">Enter absorbance readings for known concentrations</h5>
+            <div id="inputContainer">
+                <div class="row mb-2 zero">
+                    <div class="col-lg-3">
+                        <input type="number" step="0.1" class="form-control" placeholder="Concentration (mM)" required>
+                    </div>
+                    <div class="col-lg-9">
+                        <input type="text" class="form-control" placeholder="Absorbance readings (comma-separated)" required>
+                    </div>
+                </div>
+            </div>
         </div>
-        <hr>
-        <canvas id="phChart" style="width: 700px;height: 500px;"></canvas>
-        <h5 id="HalfNutrInfo" style="color: orange;"></h5>
+        <div class="form-group" style="margin-top: 10px; margin-left: 15px;">
+            <button id="addButton" class="btn btn-primary">+ Add More</button>
+            <hr>
+        </div>
+        <div class="form-group mt-2">
+            <button id="plotButton" class="btn btn-success">Plot Graph</button>
+        </div>
+
+        <canvas id="bsaChart" width="400" height="200" style="margin-left: 55px;"></canvas>
     </div>
 </div>
 
 <script>
-let phChartInstance = null;  // Store the chart instance globally
+    document.getElementById('addButton').addEventListener('click', function () {
+        const inputContainer = document.getElementById('inputContainer');
+        const row = document.createElement('div');
+        row.classList.add('row', 'mb-2', 'zero');
 
-function plotGraph() {
-    // Get user inputs
-    let phValues = document.getElementById("PhVal").value.split(",").map(Number);
-    let volumeValues = document.getElementById("VolVal").value.split(",").map(Number);
-    let HalfNutrPoint = parseFloat(document.getElementById("HfNPoint").value);  // Convert to number
+        const col1 = document.createElement('div');
+        col1.classList.add('col-lg-3');
+        const input1 = document.createElement('input');
+        input1.type = 'number';
+        input1.step = '0.1';
+        input1.classList.add('form-control');
+        input1.placeholder = 'Concentration (mM)';
+        input1.required = true;
+        col1.appendChild(input1);
 
-    if (phValues.length !== volumeValues.length || phValues.length < 2) {
-        alert("Error: Enter equal-length pH and volume values (at least 2 points).");
-        return;
-    }
+        const col2 = document.createElement('div');
+        col2.classList.add('col-lg-9');
+        const input2 = document.createElement('input');
+        input2.type = 'text';
+        input2.classList.add('form-control');
+        input2.placeholder = 'Absorbance readings (comma-separated)';
+        input2.required = true;
+        col2.appendChild(input2);
 
-    if (isNaN(HalfNutrPoint) || HalfNutrPoint < Math.min(...volumeValues) || HalfNutrPoint > Math.max(...volumeValues)) {
-        alert("Error: Half Neutralization Point must be within the range of volume values.");
-        return;
-    }
+        row.appendChild(col1);
+        row.appendChild(col2);
 
-    // Find the pH at the Half Neutralization Point using linear interpolation
-    let phAtHalfNutr = null;
-    for (let i = 0; i < volumeValues.length - 1; i++) {
-        if (volumeValues[i] <= HalfNutrPoint && volumeValues[i + 1] >= HalfNutrPoint) {
-            // Linear Interpolation Formula: y = y1 + ((x - x1) * (y2 - y1)) / (x2 - x1)
-            phAtHalfNutr = phValues[i] + ((HalfNutrPoint - volumeValues[i]) * (phValues[i + 1] - phValues[i])) / (volumeValues[i + 1] - volumeValues[i]);
-            break;
-        }
-    }
-
-    let ctx = document.getElementById("phChart").getContext("2d");
-
-    // Destroy the existing chart before creating a new one
-    if (phChartInstance) {
-        phChartInstance.destroy();
-    }
-
-    // Create the new chart
-    phChartInstance = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: volumeValues,  // X-axis: Volume of NaOH
-            datasets: [
-                {
-                    label: "pH Value",
-                    data: phValues,
-                    borderColor: "blue",
-                    borderWidth: 2,
-                    fill: false,
-                    pointBackgroundColor: "blue",
-                    pointRadius: 4
-                }
-            ]
-        },
-        options: {
-            responsive: true,
-            scales: {
-                x: { title: { display: true, text: "Volume of NaOH (mL)" } },
-                y: { title: { display: true, text: "pH Value" } }
-            },
-            plugins: {
-                annotation: {
-                    annotations: [
-                        {
-                            type: 'line',
-                            mode: 'vertical',
-                            scaleID: 'x',
-                            value: HalfNutrPoint/2,
-                            borderColor: 'orange',
-                            borderWidth: 2,
-                            borderDash: [5, 5], // Vertical Dashed line
-                            label: {
-                                enabled: true,
-                                content: `HalfNutr: ${HalfNutrPoint} mL`,
-                                position: "top",
-                                backgroundColor: "orange"
-                            }
-                        },
-                        {
-                            type: 'line',
-                            mode: 'horizontal',
-                            scaleID: 'y',
-                            value: phAtHalfNutr,
-                            borderColor: 'orange',
-                            borderWidth: 2,
-                            borderDash: [5, 5], // Horizontal Dashed line
-                            label: {
-                                enabled: true,
-                                content: `pH = ${phAtHalfNutr.toFixed(2)}`,
-                                position: "right",
-                                backgroundColor: "orange"
-                            }
-                        }
-                    ]
-                }
-            }
-        }
+        inputContainer.appendChild(row);
     });
 
-    // Display the computed pH at Half Neutralization Point
-    document.getElementById("HalfNutrInfo").innerHTML = `pH at Half Neutralization Point (${HalfNutrPoint} mL) = <strong>${phAtHalfNutr.toFixed(2)}</strong>`;
-}
+    document.getElementById('plotButton').addEventListener('click', function () {
+        const concentrations = [];
+        const absorbanceData = [];
+        let expectedLength = null;
+
+        // Collect data from the input fields
+        const rows = document.getElementById('inputContainer').getElementsByClassName('row');
+        for (let row of rows) {
+            const concentration = parseFloat(row.children[0].children[0].value);
+            const absorbanceValues = row.children[1].children[0].value.split(',').map(val => parseFloat(val.trim()));
+
+            if (!isNaN(concentration) && absorbanceValues.every(val => !isNaN(val))) {
+                concentrations.push(concentration);
+                absorbanceData.push(absorbanceValues);
+
+                // Check if the length of absorbance readings matches the expected length
+                if (expectedLength === null) {
+                    expectedLength = absorbanceValues.length; // Set the expected length from the first entry
+                } else if (absorbanceValues.length !== expectedLength) {
+                    alert('All concentrations must have the same number of absorbance readings.');
+                    return; // Stop execution
+                }
+            } else {
+                alert('Invalid input. Please ensure all values are entered correctly.');
+                return; // Stop execution
+            }
+        }
+
+        // If all lengths match, generate X-axis labels
+        const labels = Array.from({ length: expectedLength }, (_, i) => i * 30); // 0 to 30*(n-1)
+
+        // Prepare datasets for Chart.js
+        const datasets = concentrations.map((concentration, index) => {
+            return {
+                label: `Concentration: ${concentration} mM`,
+                data: absorbanceData[index],
+                borderColor: getRandomColor(),
+                fill: false,
+                tension: 0.1
+            };
+        });
+
+        // Plot the graph using Chart.js
+        new Chart(document.getElementById('bsaChart'), {
+            type: 'line',
+            data: {
+                labels: labels, // X-axis: 0, 30, 60, ..., 30*(n-1)
+                datasets: datasets
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Absorbance vs. Time'
+                    }
+                },
+                scales: {
+                    x: {
+                        title: { display: true, text: 'Time (30 second interval)' }
+                    },
+                    y: {
+                        title: { display: true, text: 'Absorbance' },
+                        min: 0
+                    }
+                }
+            }
+        });
+    });
+
+    function getRandomColor() {
+        const letters = '0123456789ABCDEF';
+        let color = '#';
+        for (let i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
 </script>
-
-
-
 </body>
 </html>

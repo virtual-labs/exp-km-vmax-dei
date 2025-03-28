@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/custom.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+	<style type="text/css">
+		@font-face{
+		 font-family:'digital-7';
+		 src: url('css/digital-7.ttf');
+		}
+
+		#nextstep{
+			visibility: hidden;
+		}
+		#CpHval{
+			border:none;width: 107px;position: absolute;margin-top: 310px;margin-left: 52px;height: 25px;z-index:2;text-align: left;font-size: 18px;line-height: 1;font-family: digital-7;
+		}
+
+		#myList{
+			position: absolute;
+			margin-top:100px;
+			margin-left: 600px;
+		}
+
+		#myList li{
+			color: #fff;
+			width: 150px;
+			background-color: #777;
+			padding: 5px 15px;
+			margin-top: 5px;
+			list-style-type: none;
+		}
+
+
+	</style>
+    
+</head>
+<body>
+
+<div class="row zero">
+    <div id="main"> 
+      <div id="myhead"><p id="masteps"> We prepare a mixture of substrate and solutions as described in the previous step(<a href="table3.html">See Table</a>) and begin taking absorbance readings immediately after adding lysozyme. To do this, click on the spectrometer lid to open it.</p> <a id="nextstep" class="btn btn-success" href="calculator.html"> Next Step</a>
+      </div>
+      <hr>
+
+    <img src="imgs3/septC.png" id="septC" style="position: absolute; top: 235px; width: 350px;">
+    <img src="imgs3/septO.png" class="dsphdd" id="septO" style="position: absolute; top: 235px; width: 350px;">
+    <img src="imgs3/septF.png" class="dsphdd" id="septF" style="position: absolute; top: 235px; width: 350px;">
+    <span id="CpHval" style="position: absolute;color: #555;padding: 1px;margin-top: 149px;margin-left: 200px;width: 155px;"></span>
+    
+    <button id="stepR" onclick="step5();" style="position: absolute;width: 60px;height: 20px;margin-left: 190px; margin-top: 217px;border:none;background:none;">
+	  </button>
+	  <button id="stepT" onclick="step3();" style="position: absolute;width: 60px;height: 20px;margin-left: 253px; margin-top: 243px;border:none;background:none;">
+	  </button>
+    <button id="stepE" onclick="step4();" style="position: absolute;width: 120px;height: 20px;margin-left: 190px; margin-top: 269px;border:none;background:none;">
+	  </button>
+	  <button id="stepOC" onclick="step1();" style="position: absolute;width: 120px;height: 105px;margin-left: 11px; margin-top: 187px;border:none;background:none;">
+	  </button>
+    
+	  
+	  <img src="imgs3/cu3.png" id="cu3" style="position: absolute; top: 295px;left: 500px; height: 150px;">
+	  <button id="stepCU" onclick="step2();" style="position: absolute;width: 50px;height: 150px;margin-left: 450px; margin-top: 170px;border:none;background:none;">
+	  </button>
+
+	  <span id="eths1" style="background-color: #555;color: #fff;padding: 5px;position: absolute;margin-top: 335px;margin-left: 20px;">Spectrometer</span>
+	  <span id="cuvlbl" style="background-color: #555;color: #fff;padding: 5px;position: absolute;margin-top: 335px;margin-left: 450px;">Cuvette</span>
+
+	  <ul id="myList">
+		</ul>
+
+
+
+	  
+    </div>
+</div>
+
+
+<script>
+
+var step=0;
+
+
+function step1()
+{
+	$("#septC").addClass("dsphdd");
+	$("#septO").removeClass("dsphdd");
+	step=1;
+	$("#masteps").text("Now, click on the micro cuvette to measure its absorbance reading.");
+}
+function step2()
+{
+	if (step==1) 
+	{		
+		$("#cu3").addClass("dsphdd");
+		$("#cuvlbl").addClass("dsphdd");
+		setTimeout(function() {
+	    $("#septO").addClass("dsphdd");
+			$("#septF").removeClass("dsphdd");
+	  }, 800);
+	  setTimeout(function() {
+	    $("#septF").addClass("dsphdd");
+			$("#septC").removeClass("dsphdd");
+	  }, 1600);
+		step=2;
+		$("#masteps").text("Now, click the test button on the spectrometer to set it to test reading mode.");
+	}
+}
+
+function step3()
+{
+	if (step==2) 
+	{
+		$("#CpHval").text("T: ");
+		step=3;
+		$("#masteps").text("Now, click the 'A450' button to take an absorbance reading at 450 nm. Note down the reading every 30 seconds.");
+	}
+}
+
+function step5()
+{
+	if (step==3) 
+	{
+		$("#CpHval").text("T: 0.7");
+		$('#myList').append('<li>0S: 0.7</li>');
+		setTimeout(function() {
+	    $("#CpHval").text("T: 0.6751");
+	    $('#myList').append('<li>30S: 0.6751</li>'); 
+	  }, 800);
+	  setTimeout(function() {
+	    $("#CpHval").text("T: 0.6502");
+	    $('#myList').append('<li>60S: 0.6502</li>');
+	  }, 1600);
+	  setTimeout(function() {
+	    $("#CpHval").text("T: 0.6253");
+	    $('#myList').append('<li>90S: 0.6253</li>');
+	  }, 2400);
+	  setTimeout(function() {
+	    $("#CpHval").text("T: 0.6004");
+	    $('#myList').append('<li>120S: 0.6004</li>');
+	  }, 3200);
+	  setTimeout(function() {
+	    $("#CpHval").text("T: 0.5755");
+	    $('#myList').append('<li>150S: 0.5755</li>');
+	  }, 4000);
+	  setTimeout(function() {
+	    $("#CpHval").text("T: 0.5506");
+	    $('#myList').append('<li>180S: 0.5506</li>');
+	    $("#masteps").text("Click on Next Step to perform various enzyme kinetics analyses.");
+	    $("#nextstep").css("visibility","visible");
+	  }, 4800);
+		step=4;
+	}
+}
+
+</script>
+
+</body>
+</html>
+
+
+
+
