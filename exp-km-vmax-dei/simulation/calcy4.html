@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    
+     <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/custom.css">
+    
+    <!-- jQuery and Bootstrap JS -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+     <script src="js/math-eq.js"></script>
+    <script src="js/chart.js"></script>
+    <style type="text/css">
+        .zero {
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="row zero">
+    <div id="main">
+        <div id="myhead">
+            <p id="masteps">
+                Calculation of V<sub>max</sub> and K<sub>m</sub> using the Lineweaver-Burk plot.
+            </p>
+        </div>
+        <hr>
+
+        <div class="form-group">
+            <h5 style="text-align: left;">Enter absorbance readings for known concentrations</h5>
+            <div id="inputContainer">
+                <div class="row mb-2 zero">
+                    <div class="col-lg-3">
+                        <input type="number" step="0.01" class="form-control concentration" placeholder="Concentration (S)" required>
+                    </div>
+                    <div class="col-lg-9">
+                        <input type="number" step="0.01" class="form-control velocity" placeholder="Initial Velocity (V0)" required>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group" style="margin-top: 10px; margin-left: 15px;">
+            <button id="addButton" class="btn btn-primary">+ Add More</button>
+            <hr>
+        </div>
+        <div class="form-group mt-2">
+            <button id="plotButton" class="btn btn-success">Plot Graph</button>
+        </div>
+
+        <canvas id="lbPlot" width="400" height="200" style="margin-left: 55px;"></canvas>
+        <div id="results">
+        <h3>Results:</h3>
+        <p><b>Vmax:</b> <span id="vmax"></span></p>
+        <p><b>Km:</b> <span id="km"></span></p>
+        <p>The Lineweaver-Burk plot is a double-reciprocal graph used to determine the Michaelis constant (K<sub>m</sub>) and maximum reaction velocity (V<sub>max</sub>) for enzyme-catalyzed reactions. The calculation is performed as follows:</p>
+        <p>First we have the Michaelis-Menten equation:</p>
+        <p>
+          \[
+          v_0 = \frac{V_{max}[S]}{K_m + [S]}
+          \]
+        </p>
+        <p>Where:<br>
+            v0: Initial velocity<br>
+            V<sub>max</sub>: Maximum velocity<br>
+            [S]: Substrate concentration<br>
+            K<sub>m</sub> Michaelis constant
+        </p>
+        <p>In next step we take the reciprocal of both sides to linearize the equation:</p>
+        <p>
+          \[
+          \frac{1}{v_0} = \frac{K_m}{V_{max}[S]} + \frac{1}{V_{max}}
+          \]
+        </p>
+        <p>This is in the form of a straight line:</p>
+        <p>
+          \[
+          y = mx + c
+          \]
+        </p>
+        <p>Where:<br>
+        \( y = \frac{1}{v_0} \) (reciprocal of initial velocity) <br>
+        \( x = \frac{1}{[S]} \) (reciprocal of substrate concentration)</p>
+
+        <p> Here Slope \( (m) = \frac{K_m}{V_{max}} \) is used to calculate 
+            \(K_m = \text{slope} \times V_{max}\) <br>and Y-intercept \(= \frac{1}{V_{max}} \) is used to calculate \(V_{max} = \frac{1}{\text{Y-intercept}}\).
+            
+        </p>
+        <p>
+      
+    </p>
+        
+    </div>
+    </div>
+</div>
+
+
+    <script>
+        // Add more input fields
+        document.getElementById('addButton').addEventListener('click', () => {
+            const inputContainer = document.getElementById('inputContainer');
+            const row = document.createElement('div');
+            row.classList.add('row', 'mb-2', 'zero');
+            row.innerHTML = `
+                <div class="col-lg-3">
+                    <input type="number" step="0.01" class="form-control concentration" placeholder="Concentration (S)" required>
+                </div>
+                <div class="col-lg-9">
+                    <input type="number" step="0.01" class="form-control velocity" placeholder="Initial Velocity (V0)" required>
+                </div>
+            `;
+            inputContainer.appendChild(row);
+        });
+
+    //     document.getElementById('addButton').addEventListener('click', function () {
+    //     const inputContainer = document.getElementById('inputContainer');
+    //     const row = document.createElement('div');
+    //     row.classList.add('row', 'mb-2', 'zero');
+
+    //     const col1 = document.createElement('div');
+    //     col1.classList.add('col-lg-3');
+    //     const input1 = document.createElement('input');
+    //     input1.type = 'number';
+    //     input1.step = '0.1';
+    //     input1.classList.add('form-control');
+    //     input1.placeholder = 'Concentration (mM)';
+    //     input1.required = true;
+    //     col1.appendChild(input1);
+
+    //     const col2 = document.createElement('div');
+    //     col2.classList.add('col-lg-9');
+    //     const input2 = document.createElement('input');
+    //     input2.type = 'text';
+    //     input2.classList.add('form-control');
+    //     input2.placeholder = 'Absorbance readings (comma-separated)';
+    //     input2.required = true;
+    //     col2.appendChild(input2);
+
+    //     row.appendChild(col1);
+    //     row.appendChild(col2);
+
+    //     inputContainer.appendChild(row);
+    // });
+
+
+        // Generate the Lineweaver-Burk Plot
+        document.getElementById('plotButton').addEventListener('click', () => {
+            const concentrations = Array.from(document.getElementsByClassName('concentration'))
+                .map(input => parseFloat(input.value))
+                .filter(value => !isNaN(value));
+
+            const velocities = Array.from(document.getElementsByClassName('velocity'))
+                .map(input => parseFloat(input.value))
+                .filter(value => !isNaN(value));
+
+            // Calculate reciprocals
+            const x = concentrations.map(s => 1 / s); // 1/S
+            const y = velocities.map(v => 1 / v);    // 1/V0
+
+            // Perform linear regression to get slope and intercept
+            const { slope, intercept } = linearRegression(x, y);
+
+            // Validate intercept
+            if (intercept <= 0) {
+                alert("Invalid data: intercept is zero or negative, resulting in an undefined Vmax.");
+                return;
+            }
+
+            // Calculate Vmax and Km
+            const vmax = 1 / intercept; // Vmax = 1 / y-intercept
+            const km = slope * vmax;   // Km = slope * Vmax
+
+            // Update results
+            document.getElementById('vmax').textContent = vmax.toFixed(4);
+            document.getElementById('km').textContent = km.toFixed(4);
+
+            // Generate the plot
+            new Chart(document.getElementById('lbPlot'), {
+                type: 'scatter',
+                data: {
+                    datasets: [
+                        {
+                            label: 'Lineweaver-Burk Data',
+                            data: x.map((xi, i) => ({ x: xi, y: y[i] })),
+                            backgroundColor: 'blue'
+                        },
+                        {
+                            label: 'Fitted Line',
+                            data: x.map(xi => ({ x: xi, y: slope * xi + intercept })),
+                            type: 'line',
+                            borderColor: 'red',
+                            borderWidth: 2,
+                            fill: false
+                        }
+                    ]
+                },
+                options: {
+                    scales: {
+                        x: {
+                            title: { display: true, text: '1/[S]' }
+                        },
+                        y: {
+                            title: { display: true, text: '1/V0' }
+                        }
+                    }
+                }
+            });
+        });
+
+        // Linear regression function
+        function linearRegression(x, y) {
+            const n = x.length;
+            const sumX = x.reduce((a, b) => a + b, 0);
+            const sumY = y.reduce((a, b) => a + b, 0);
+            const sumXY = x.reduce((sum, xi, i) => sum + xi * y[i], 0);
+            const sumX2 = x.reduce((sum, xi) => sum + xi * xi, 0);
+
+            const slope = (n * sumXY - sumX * sumY) / (n * sumX2 - sumX * sumX);
+            const intercept = (sumY - slope * sumX) / n;
+
+            return { slope, intercept };
+        }
+    </script>
+</body>
+</html>

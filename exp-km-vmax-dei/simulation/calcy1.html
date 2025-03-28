@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>BSA Concentration vs Absorbance</title>
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/custom.css">
+    
+    <!-- jQuery and Bootstrap JS -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/math-eq.js"></script>
+   
+    
+    <!-- Chart.js (Using local file or CDN) -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style type="text/css">
+        .zero {
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="row zero">
+    <div id="main"> 
+        <div id="myhead">
+            <p id="masteps">Initial Velocity Calculator.</p>
+            <a id="nextstep" class="btn btn-success dsphdd" href="step2.html">Next Step</a>
+        </div>
+        <hr>
+        <div class="form-group" style="margin-top: 50px;">
+            <h5 style="text-align: left;">Enter the absorbance readings, separated by commas.</h5>
+            <input type="text" id="values" class="form-control" placeholder="Absorbance reading" style="width: 100%;">
+            <br>
+            <button class="btn btn-success" id="calculate" onclick="calinval();" >Calculate</button>
+        </div>
+        <hr>
+        <p id="invlcty"></p>
+        <div id="descrip" class="dsphdd">
+        <p>It is calculated using the following equation:</p>
+        <p >\[\frac{\triangle A}{\triangle t}\]</p>
+        <p>where \(\Delta A \) represents the absorbance difference after a particular time, and \(\Delta t \) represents the corresponding time difference.</p>
+        <p>In this calculation, the initial velocity is determined over a time interval of 60 seconds. It is assumed that absorbance readings are taken every 30 seconds, starting from the initial time of 0 seconds.</p>
+        <p><i>Similarly, we calculate the initial velocity for different substrate concentrations to determine the K<sub>m</sub> and V<sub>max</sub> values.</i></p>
+        </div>
+        
+
+
+
+    </div>
+</div>
+
+
+<script>
+//  \(\Delta A \) for within paragraph
+//  \[\Delta A \] for new line equation format
+
+
+function calinval()
+{
+    var input = $("#values").val();
+    var numbers = input
+        .split(",") // Split by commas
+        .map(num => parseFloat($.trim(num))) // Trim whitespace and convert to float
+        .filter(num => !isNaN(num)); // Remove invalid numbers
+
+    var Sum =0;
+    inval=(numbers[0]-numbers[3])/60;
+    $("#invlcty").text("The initial velocity is: "+inval.toFixed(5)+" Abs/sec");
+    $("#descrip").removeClass("dsphdd")
+
+
+}
+</script>
+
+</body>
+</html>
+
+

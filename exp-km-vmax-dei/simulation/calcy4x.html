@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Michaelis-Menten Plot</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #fff;
+            color: black;
+        }
+        canvas {
+            max-width: 1000px;
+            margin: 20px auto;
+            background: #fff;
+        }
+        #annotations {
+            position: absolute;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <h2>Michaelis-Menten Plot</h2>
+
+    <div id="inputContainer">
+        <div class="form-group row">
+            <div class="col-md-3">
+                <input type="number" step="0.01" class="form-control concentration" placeholder="Concentration (mM)" value="0.5" required>
+            </div>
+            <div class="col-md-3">
+                <input type="number" step="0.0001" class="form-control velocity" placeholder="Velocity (Abs/sec)" value="0.00124" required>
+            </div>
+        </div>
+    </div>
+    <button id="addButton">+ Add More</button>
+    <button id="plotButton">Plot Graph</button>
+
+    <canvas id="michaelisMentenChart" width="600" height="300"></canvas>
+
+    <p id="results"></p>
+
+    <script>
+        document.getElementById('addButton').addEventListener('click', () => {
+            const inputContainer = document.getElementById('inputContainer');
+            const row = document.createElement('div');
+            row.classList.add('form-group', 'row');
+            row.innerHTML = `
+                <div class="col-md-3">
+                    <input type="number" step="0.01" class="form-control concentration" placeholder="Concentration (mM)" required>
+                </div>
+                <div class="col-md-3">
+                    <input type="number" step="0.0001" class="form-control velocity" placeholder="Velocity (Abs/sec)" required>
+                </div>
+            `;
+            inputContainer.appendChild(row);
+        });
+
+        document.getElementById('plotButton').addEventListener('click', () => {
+            const concentrations = Array.from(document.getElementsByClassName('concentration')).map(input => parseFloat(input.value)).filter(val => !isNaN(val));
+            const velocities = Array.from(document.getElementsByClassName('velocity')).map(input => parseFloat(input.value)).filter(val => !isNaN(val));
+
+            const reciprocalS = concentrations.map(s => 1 / s);
+            const reciprocalV = velocities.map(v => 1 / v);
+
+            function linearRegression(x, y) {
+                const n = x.length;
+                const sumX = x.reduce((a, b) => a + b, 0);
+                const sumY = y.reduce((a, b) => a + b, 0);
+                const sumXY = x.reduce((acc, val, i) => acc + val * y[i], 0);
+                const sumX2 = x.reduce((acc, val) => acc + val * val, 0);
+
+                const slope = (n * sumXY - sumX * sumY) / (n * sumX2 - sumX * sumX);
+                const intercept = (sumY - slope * sumX) / n;
+
+                return { slope, intercept };
+            }
+
+            const { slope, intercept } = linearRegression(reciprocalS, reciprocalV);
+
+            const Vmax = 1 / intercept;
+            const Km = slope * Vmax;
+
+            document.getElementById('results').innerHTML = `Vmax: ${Vmax.toFixed(5)} Abs/sec, Km: ${Km.toFixed(2)} mM`;
+
+            const smoothS = [];
+            const smoothV = [];
+            for (let s = 0; s <= Math.max(...concentrations) + 5; s += 0.1) {
+                smoothS.push(s);
+                smoothV.push((Vmax * s) / (Km + s));
+            }
+
+            const ctxMM = document.getElementById('michaelisMentenChart').getContext('2d');
+            new Chart(ctxMM, {
+                type: 'scatter',
+                data: {
+                    datasets: [
+                        {
+                            label: 'Experimental Data',
+                            data: concentrations.map((s, i) => ({ x: s, y: velocities[i] })),
+                            borderColor: 'red',
+                            backgroundColor: 'red',
+                            pointRadius: 6,
+                            showLine: false
+                        },
+                        {
+                            label: `Fit Curve: Vmax=${Vmax.toFixed(5)}, Km=${Km.toFixed(2)}`,
+                            data: smoothS.map((s, i) => ({ x: s, y: smoothV[i] })),
+                            borderColor: 'black',
+                            borderWidth: 2,
+                            pointRadius: 0,
+                            tension: 0.4,
+                            type: 'line',
+                            fill: false
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { display: true }
+                    },
+                    scales: {
+                        x: {
+                            title: { display: true, text: '[S] (mM)' },
+                            ticks: { color: 'black' },
+                            grid: { color: '#ccc' },
+                            max: Math.max(...concentrations) + 5
+                        },
+                        y: {
+                            title: { display: true, text: 'V₀ (Abs/sec)' },
+                            ticks: { color: 'black' },
+                            grid: { color: '#ccc' }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
