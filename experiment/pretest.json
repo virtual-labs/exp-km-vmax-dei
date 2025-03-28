@@ -2,38 +2,61 @@
   "version": 2.0,
   "questions": [
     {
-      "question": "This is a Sample Question 1?",
+      "question": "1. What is the primary function of lysozyme in this experiment?",
       "answers": {
-        "a": "answer1",
-        "b": "answer2",
-        "c": "answer3",
-        "d": "answer4"
+        "a": "Breaking down proteins.",
+        "b": "Hydrolyzing bacterial cell walls.",
+        "c": "Synthesizing peptidoglycan.",
+        "d": "Inhibiting bacterial metabolism."
       },
-      "explanations": {
-        "a": "Explanation 1  <a href='www.google.com'>here</a>",
-        "b": "Explanation 2",
-        "c": "Explanation 2",
-        "d": "Explanation 2"
+      "correctAnswer": "b",
+    },
+
+    {
+      "question": "2. Which parameter represents the maximum reaction rate when the enzyme is fully saturated with the substrate?",
+      "answers": {
+        "a": "Km",
+        "b": "Vmax",
+        "c": "kcat",
+        "d": "Activation energy"
+      },
+      "correctAnswer": "b",
+    },
+
+    {
+      "question": "3. What is the standard method for measuring lysozyme activity in this experiment?",
+      "answers": {
+        "a": "Change in fluorescence.",
+        "b": "Decrease in absorbance at 450 nm.",
+        "c": "Change in pH.",
+        "d": "Increase in conductivity"
+      },
+      "correctAnswer": "b",
+    },
+
+    {
+      "question": "4. If an enzyme has a low Km, what does this indicate?",
+      "answers": {
+        "a": "The enzyme has a high affinity for its substrate.",
+        "b": "The enzyme requires a high substrate concentration for activity.",
+        "c": "The enzyme is ineffective at catalysis.",
+        "d": "The enzyme functions only at high temperatures."
       },
       "correctAnswer": "a",
-      "difficulty": "beginner"
     },
+
     {
-      "question": "This is a Sample Question 2?",
+      "question": "5. In the Lineweaver-Burk plot, how is Km determined?",
       "answers": {
-        "a": "answer1",
-        "b": "answer2",
-        "c": "answer3",
-        "d": "answer4"
+        "a": "From the Y-intercept.",
+        "b": "As the negative reciprocal of the X-intercept.",
+        "c": "From the slope of the plot.",
+        "d": "As the maximum absorbance value."
       },
-      "explanations": {
-        "a": "Explanation 1  <a href='www.google.com'>here</a>",
-        "b": "Explanation 2",
-        "c": "Explanation 2",
-        "d": "Explanation 2"
-      },
-      "correctAnswer": "c",
-      "difficulty": "beginner"
-    }
+      "correctAnswer": "b",
+    },
+
+    
+    
   ]
 }
