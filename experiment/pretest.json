@@ -9,9 +9,8 @@
         "c": "Synthesizing peptidoglycan.",
         "d": "Inhibiting bacterial metabolism."
       },
-      "correctAnswer": "b",
+      "correctAnswer": "b"
     },
-
     {
       "question": "2. Which parameter represents the maximum reaction rate when the enzyme is fully saturated with the substrate?",
       "answers": {
@@ -20,9 +19,8 @@
         "c": "kcat",
         "d": "Activation energy"
       },
-      "correctAnswer": "b",
+      "correctAnswer": "b"
     },
-
     {
       "question": "3. What is the standard method for measuring lysozyme activity in this experiment?",
       "answers": {
@@ -31,9 +29,8 @@
         "c": "Change in pH.",
         "d": "Increase in conductivity"
       },
-      "correctAnswer": "b",
+      "correctAnswer": "b"
     },
-
     {
       "question": "4. If an enzyme has a low Km, what does this indicate?",
       "answers": {
@@ -42,9 +39,8 @@
         "c": "The enzyme is ineffective at catalysis.",
         "d": "The enzyme functions only at high temperatures."
       },
-      "correctAnswer": "a",
+      "correctAnswer": "a"
     },
-
     {
       "question": "5. In the Lineweaver-Burk plot, how is Km determined?",
       "answers": {
@@ -53,10 +49,7 @@
         "c": "From the slope of the plot.",
         "d": "As the maximum absorbance value."
       },
-      "correctAnswer": "b",
-    },
-
-    
-    
+      "correctAnswer": "b"
+    }
   ]
 }
