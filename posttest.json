@@ -1,0 +1,55 @@
+{
+  "version": 2.0,
+  "questions": [
+    {
+      "question": "1. What type of macromolecule is lysozyme?",
+      "answers": {
+        "a": "Lipid.",
+        "b": "Carbohydrate.",
+        "c": "Protein.",
+        "d": "Nucleic acid"
+      },
+      "correctAnswer": "c"
+    },
+    {
+      "question": "2. What does Km represent in enzyme kinetics?",
+      "answers": {
+        "a": "The maximum reaction velocity.",
+        "b": "The substrate concentration at half Vmax.",
+        "c": "The number of active enzyme molecules.",
+        "d": "The total amount of substrate present."
+      },
+      "correctAnswer": "b"
+    },
+    {
+      "question": "3. Which organism's cell walls are typically used as a substrate in lysozyme activity experiments?",
+      "answers": {
+        "a": "Escherichia coli.",
+        "b": "Micrococcus luteus.",
+        "c": "Saccharomyces cerevisiae.",
+        "d": "Bacillus subtilis."
+      },
+      "correctAnswer": "b"
+    },
+    {
+      "question": "4. Which of the following factors does not directly affect lysozyme activity?",
+      "answers": {
+        "a": "Substrate concentration.",
+        "b": "Enzyme concentration.",
+        "c": "Atmospheric pressure.",
+        "d": "pH of the solution."
+      },
+      "correctAnswer": "c"
+    },
+    {
+      "question": "5. In an enzymatic reaction, if increasing substrate concentration does not increase the reaction rate, what is most likely happening?",
+      "answers": {
+        "a": "The enzyme is denatured.",
+        "b": "The reaction has reached Vmax.",
+        "c": "The substrate is being depleted.",
+        "d": "The enzyme has low affinity for the substrate."
+      },
+      "correctAnswer": "b"
+    }
+  ]
+}

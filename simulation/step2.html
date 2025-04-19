@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/custom.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+	<style type="text/css">
+		@font-face{
+		 font-family:'digital-7';
+		 src: url('css/digital-7.ttf');
+		}
+
+		#nextstep{
+			visibility: hidden;
+		}
+		#CpHval{
+			border:none;width: 107px;position: absolute;margin-top: 310px;margin-left: 52px;height: 25px;z-index:2;text-align: center;font-size: 21px;line-height: 1;font-family: digital-7;
+		}
+
+
+	</style>
+    
+</head>
+<body>
+
+<div class="row zero">
+    <div id="main"> 
+      <div id="myhead"><p id="masteps">In this part of the experiment, the reaction between the substrate and lysozyme enzyme is performed <a href="table2.html" target="_blank">( See Table )</a>. For this click on Substrate rack.</p> <a id="nextstep" class="btn btn-success" href="step2.html"> Next Step</a>
+      </div>
+      <hr>
+
+    <img src="imgs2/sol0.png" id="sol0" style="position: absolute; top: 435px; width: 350px;">
+    <img src="imgs2/sol1.png" id="sol1" class="dsphdd" style="position: absolute; top: 435px; width: 350px;">
+    <button id="step1" onclick="step1();" style="position: absolute;width: 350px;height: 100px;margin-top: 302px;border:none;background:none;">
+	  </button>
+    <img src="imgs2/tbff.png" id="tbff" class="dsphdd" style="position: absolute; top: 385px;left: 425px; height: 135px;">
+    <img src="imgs2/tbnf.png" id="tbnf" class="dsphdd" style="position: absolute; top: 385px;left: 425px; height: 135px;">
+     <img src="imgs2/pptu.png" id="tbfUP" class="dsphdd" style="position: absolute; top: 195px;left: 400px; height: 315px;">
+	  <img src="imgs2/pptd.png" id="tbfDW" class="dsphdd" style="position: absolute; top: 195px;left: 400px; height: 315px;">
+    <button id="step4" onclick="step4();" style="position: absolute;width: 45px;height: 105px;margin-top: 300px;margin-left: 375px;border:none;background:none;">
+	  </button>
+	  
+	  <img src="imgs2/cu0.png" id="cu0" style="position: absolute; top: 370px;left: 525px;height: 150px;">
+	  <img src="imgs2/cu1.png" id="cu1" class="dsphdd" style="position: absolute; top: 370px;left: 525px;height: 150px;">
+	  <img src="imgs2/cu2.png" id="cu2" class="dsphdd" style="position: absolute; top: 370px;left: 525px;height: 150px;">
+	  <img src="imgs2/cu3.png" id="cu3" class="dsphdd" style="position: absolute; top: 370px;left: 525px;height: 150px;">
+	  <img src="imgs2/pptu.png" id="cuUP" class="dsphdd" style="position: absolute; top: 157px;left: 505px; height: 315px;">
+	  <img src="imgs2/pptd.png" id="cuDW" class="dsphdd" style="position: absolute; top: 157px;left: 505px; height: 315px;">
+
+	  <img src="imgs2/bfr.png" id="bfr" style="position: absolute; top: 370px;left: 600px; height: 155px;">
+	  <img src="imgs2/pptu.png" id="bfrUP" class="dsphdd" style="position: absolute; top: 154px;left: 632px; height: 315px;">
+	  <img src="imgs2/pptd.png" id="bfrDW" class="dsphdd" style="position: absolute; top: 154px;left: 632px; height: 315px;">
+	  <button id="step5" onclick="step5();" style="position: absolute;width: 130px;height: 150px;margin-top: 250px;margin-left: 557px;border:none;background:none;">
+	  </button>
+	  
+	  
+
+	  <img src="imgs2/ppt.png" id="lyUP" class="dsphdd" style="position: absolute; top: 109px;left: 730px; height: 315px;">
+	  <img src="imgs2/ppte.png" id="lyDW" class="dsphdd" style="position: absolute; top: 109px;left: 730px; height: 315px">
+	  <img src="imgs2/lyC.png" id="lyC" style="position: absolute; top: 300px;left: 755px;height: 225px;">
+	  <img src="imgs2/lyO.png" id="lyO" class="dsphdd" style="position: absolute; top: 300px;left: 755px;height: 225px;">
+	  <button id="step6" onclick="step6();" style="position: absolute;width: 50px;height: 225px;margin-top: 175px;margin-left: 705px;border:none;background:none;">
+	  </button>
+	  
+
+
+	  <img src="imgs2/pptsn.png" class="dsphdd" id="pptsn" style="position: absolute; top: 200px;left: 850px; height: 325px;">
+	  <img src="imgs2/ppts.png" id="ppts" style="position: absolute; top: 200px;left: 850px; height: 325px;">
+	  <button id="step2" onclick="step2();" style="position: absolute;margin-left:825px;width: 135px;height: 300px;margin-top: 100px;border: none;background:none">
+	  </button>
+
+	  <img src="imgs2/ppt.png" id="ppt" class="dsphdd" style="position: absolute; top: 109px;left: 830px; height: 315px;">
+	  <button id="step3" onclick="step3();" style="position: absolute;margin-left: 800px;margin-top: 10px;width: 65px;height:75px;border:none;background: none;">
+	  </button>	  
+	  
+	  <span id="Tbred" class="red dsphdd" style="position: absolute;color: #555;padding: 1px;margin-top: 165px;margin-left: 367px;transform: rotate(270deg);width: 55px;">28</span>
+
+	  <span id="Cured" class="red dsphdd" style="position: absolute;color: #555;padding: 1px;margin-top: 127px;margin-left: 472px;transform: rotate(270deg);width: 55px;">28</span>
+	  
+	  <span id="Bfrred" class="red dsphdd" style="position: absolute;color: #555;padding: 1px;margin-top: 125px;margin-left: 600px;transform: rotate(270deg);width: 55px;">28</span>
+	  <span id="Lyred" class="red dsphdd" style="position: absolute;color: #555;padding: 1px;margin-top: 87px;margin-left: 700px;transform: rotate(270deg);width: 55px;">28</span>
+	  <span id="Pptred" class="red dsphdd" style="position: absolute;color: #555;padding: 1px;margin-top: 87px;margin-left: 800px;transform: rotate(270deg);width: 55px;">08</span>
+
+
+	  <span id="eths1" style="background-color: #555;color: #fff;padding: 5px;position: absolute;margin-top: 415px;">Substrate of different concentration<br> (s6, s5, s4, s3, s2, s1)</span>
+		<span id="acidx" style="background-color: #555;color: #fff;padding: 5px;position: absolute;margin-left: 470px;margin-top: 415px;">cuvette</span>
+		<span id="acidx" style="background-color: #555;color: #fff;padding: 5px;position: absolute;margin-left: 575px;margin-top: 415px;">Buffer Solution<br>(pH~6.2)</span>
+		<span id="acidx" style="background-color: #555;color: #fff;padding: 5px;position: absolute;margin-left: 700px;margin-top: 415px;">Lysozyme<br>Solution</span>
+		<span id="acidx" style="background-color: #555;color: #fff;padding: 5px;position: absolute;margin-left: 835px;margin-top: 415px;">Micro Pipette</span>
+
+
+	  
+    </div>
+</div>
+
+
+<script>
+
+var step=0;
+
+
+function step1()
+{
+	$("#sol1").removeClass("dsphdd");
+	$("#sol0").addClass("dsphdd");
+	$("#tbff").removeClass("dsphdd");
+	$("#masteps").text("Now, click on micropipette.");
+	step=1;
+}
+
+function step2()
+{
+	if (step==1)
+	{
+	$("#pptsn").removeClass("dsphdd");
+	$("#ppts").addClass("dsphdd");
+	$("#ppt").removeClass("dsphdd");
+	$("#masteps").text("Now, set the reading to 5 µL to measure the substrate by clicking on the micropipette wheel.");
+	step=2;
+	}
+}
+
+function step3()
+{
+	if (step==2)
+	{
+	$("#Pptred").removeClass("dsphdd");
+	$(".red").text("05");
+	$("#masteps").text("Now, click on the microcentrifuge to pour 5 µL of substrate into the cuvette.");
+	step=3;
+	}
+	else if (step==4)
+	{
+	$("#Pptred").removeClass("dsphdd");
+	$(".red").text("895");
+	step=5;
+	$("#masteps").text("Now, click on the Buffer Solution flask to pour 895 µL of this solution into the cuvette.");
+	}
+	else if (step==6)
+	{
+	$("#Pptred").removeClass("dsphdd");
+	$(".red").text("100");
+	step=7;
+	$("#masteps").text("Now, click on the Buffer Solution flask to pour 100 µL of Lysozyme solution into the cuvette.");
+	}
+}
+
+function step4()
+{
+	if (step==3)
+	{
+		$("#ppt").addClass("dsphdd");
+		$("#Pptred").addClass("dsphdd");
+		setTimeout(function() {
+	    $("#tbfDW").removeClass("dsphdd");
+	    $("#Tbred").removeClass("dsphdd");
+	  }, 800);
+	  setTimeout(function() {
+	    $("#tbfUP").removeClass("dsphdd");
+	    $("#tbnf").removeClass("dsphdd");
+	    $("#tbfDW").addClass("dsphdd");
+			$("#tbff").addClass("dsphdd");
+	  }, 1600);
+	  setTimeout(function() {
+	    $("#tbfUP").addClass("dsphdd");
+	    $("#Tbred").addClass("dsphdd");
+	  }, 2400);
+	  setTimeout(function() {
+	    $("#cuUP").removeClass("dsphdd");
+	    $("#Cured").removeClass("dsphdd");
+	  }, 3200);
+	  setTimeout(function() {
+	    $("#cuUP").addClass("dsphdd");
+	    $("#cuDW").removeClass("dsphdd");
+	    $("#cu1").removeClass("dsphdd");
+	    $("#cu0").addClass("dsphdd");
+	  }, 4000);
+	  setTimeout(function() {
+	    $("#cuDW").addClass("dsphdd");
+	    $("#Cured").addClass("dsphdd");
+	  }, 4800);
+	  setTimeout(function() {
+	    $("#ppt").removeClass("dsphdd");
+	  }, 5600);
+		step=4;
+		$("#masteps").text("Now, set the micropipette reading to 895 µL to measure the buffer solution by clicking on the micropipette wheel.");
+	}
+}
+
+
+function step5()
+{
+	if (step==5)
+	{
+		$("#ppt").addClass("dsphdd");
+		$("#Pptred").addClass("dsphdd");
+		setTimeout(function() {
+	    $("#bfrDW").removeClass("dsphdd");
+	    $("#Bfrred").removeClass("dsphdd");
+	  }, 800);
+	  setTimeout(function() {
+	    $("#bfrUP").removeClass("dsphdd");
+	    $("#bfrDW").addClass("dsphdd");
+	  }, 1600);
+	  setTimeout(function() {
+	    $("#bfrUP").addClass("dsphdd");
+	    $("#Bfrred").addClass("dsphdd");
+	  }, 2400);
+	  setTimeout(function() {
+	    $("#cuUP").removeClass("dsphdd");
+	    $("#Cured").removeClass("dsphdd");
+	  }, 3200);
+	  setTimeout(function() {
+	    $("#cuUP").addClass("dsphdd");
+	    $("#cuDW").removeClass("dsphdd");
+	    $("#cu2").removeClass("dsphdd");
+	    $("#cu1").addClass("dsphdd");
+	  }, 4000);
+	  setTimeout(function() {
+	    $("#cuDW").addClass("dsphdd");
+	    $("#Cured").addClass("dsphdd");
+	  }, 4800);
+	  setTimeout(function() {
+	    $("#ppt").removeClass("dsphdd");
+	  }, 5600);
+		step=6;
+		$("#masteps").text("Now, set the micropipette reading to 100 µL to measure the Lysozyme solution by clicking on the micropipette wheel.");
+	}
+}
+
+function step6()
+{
+	if (step==7)
+	{
+		$("#lyO").removeClass("dsphdd");
+		$("#lyC").addClass("dsphdd");
+		setTimeout(function() {
+	    $("#ppt").addClass("dsphdd");
+			$("#Pptred").addClass("dsphdd");
+	  }, 800);
+	  setTimeout(function() {
+	    $("#lyDW").removeClass("dsphdd");
+	    $("#Lyred").removeClass("dsphdd");
+	  }, 1600);
+	  setTimeout(function() {
+	    $("#lyUP").removeClass("dsphdd");
+	    $("#lyDW").addClass("dsphdd");
+	  }, 2400);
+	  setTimeout(function() {
+	    $("#lyUP").addClass("dsphdd");
+	    $("#Lyred").addClass("dsphdd");
+	  }, 3200);
+	  setTimeout(function() {
+	    $("#cuUP").removeClass("dsphdd");
+	    $("#Cured").removeClass("dsphdd");
+	  }, 4000);
+	  setTimeout(function() {
+	    $("#cuUP").addClass("dsphdd");
+	    $("#cuDW").removeClass("dsphdd");
+	    $("#cu3").removeClass("dsphdd");
+	    $("#cu2").addClass("dsphdd");
+	  }, 4800);
+	  setTimeout(function() {
+	    $("#cuDW").addClass("dsphdd");
+	    $("#Cured").addClass("dsphdd");
+	  }, 5600);
+	  setTimeout(function() {
+	    $("#ppt").removeClass("dsphdd");
+	    alert("Immediately take the absorbance reading of the prepared sample.")
+	  }, 6400);
+	  setTimeout(function() {
+	    window.location.href = "step3.html";
+	  }, 7200);
+		step=8;
+	}
+}
+
+
+
+
+</script>
+
+</body>
+</html>
+
+
+
+

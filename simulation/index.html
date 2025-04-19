@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/custom.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+	<style type="text/css">
+		@font-face{
+		 font-family:'digital-7';
+		 src: url('css/digital-7.ttf');
+		}
+
+		#nextstep{
+			visibility: hidden;
+		}
+
+	</style>
+    
+</head>
+<body>
+
+<div class="row zero">
+    <div id="main"> 
+      <div id="myhead"><p id="masteps"> The first step is the preparation of substrate solutions of different concentrations <a href="table1.html" target="_blank">( See Table )</a>. For this, click on the rack of microcentrifuge tubes.</p> <a id="nextstep" class="btn btn-success" href="step2.html"> Next Step</a>
+      </div>
+      <hr>
+
+    <button class="btn btn-success dsphdd" id="record" onclick="record();" style="padding: 15px;position: absolute;margin-top: 10px;margin-left: 10px;">Run</button>
+
+    <button id="step1" onclick="step1();" style="position: absolute;width: auto;margin-top: 267px;border: none;background: none;">
+    <img src="imgs1/sol.png" id="sol" style="position: absolute;width: 350px;">
+    <img src="imgs1/sol0.png" id="sol0" class="dsphdd" style="position: absolute;width: 350px;">
+    <img src="imgs1/sol1.png" id="sol1" class="dsphdd" style="position: absolute;width: 350px;">
+    <img src="imgs1/sol2.png" id="sol2" class="dsphdd" style="position: absolute;width: 350px;">
+    <img src="imgs1/sol3.png" id="sol3" class="dsphdd" style="position: absolute;width: 350px;">
+    <img src="imgs1/sol4.png" id="sol4" class="dsphdd" style="position: absolute;width: 350px;">
+    <img src="imgs1/sol5.png" id="sol5" class="dsphdd" style="position: absolute;width: 350px;">
+    <img src="imgs1/sol6.png" id="sol6" class="dsphdd" style="position: absolute;width: 350px;">
+    </button>
+
+    <img src="imgs1/tbnf.png" id="tbnf" class="dsphdd" style="position: absolute; top: 327px;left: 425px; height: 135px;">
+    <img src="imgs1/tbhf.png" id="tbhf" class="dsphdd" style="position: absolute; top: 327px;left: 425px; height: 135px;">
+    <img src="imgs1/tbff.png" id="tbff" class="dsphdd" style="position: absolute; top: 327px;left: 425px; height: 135px;">
+    <img src="imgs1/pptu.png" id="tbffUP" class="dsphdd" style="position: absolute; top: 137px;left: 401px; height: 315px;">
+	  <img src="imgs1/pptd.png" id="tbffDW" class="dsphdd" style="position: absolute; top: 137px;left: 401px; height: 315px;">
+
+	  <img src="imgs1/subC.png" id="subC"  style="position: absolute; top: 302px;left: 525px;height: 175px;">
+	  <img src="imgs1/subO.png" id="subO" class="dsphdd" style="position: absolute; top: 302px;left: 525px;height: 175px;">
+	  <img src="imgs1/pptux.png" id="subUP" class="dsphdd" style="position: absolute; top: 125px;left: 523px; width: 75px;">
+	  <img src="imgs1/pptdx.png" id="subDW" class="dsphdd" style="position: absolute; top: 125px;left: 523px; width: 75px;">
+	  <button id="step4" onclick="step4();" style="position: absolute;width: 90px;height: 150px;margin-top: 200px;margin-left:475px;border:none ;background: none">
+    </button>
+
+	  <img src="imgs1/bfr.png" id="bfr" style="position: absolute; top: 325px;left: 635px; height: 155px;">
+	  <img src="imgs1/pptu.png" id="bfrUP" class="dsphdd" style="position: absolute; top: 109px;left: 657px; height: 315px;">
+	  <img src="imgs1/pptd.png" id="bfrDW" class="dsphdd" style="position: absolute; top: 109px;left: 657px; height: 315px;">
+	  <button id="step5" onclick="step5();" style="position: absolute;width: 135px;height: 150px;margin-top: 210px;margin-left:590px;border:none;background: none;">
+    </button> 
+
+	  <img src="imgs1/pptsn.png" id="pptsn" class="dsphdd" style="position: absolute;width: auto;margin-top: 30px;margin-left:750px;height: 325px;">
+	  <img src="imgs1/ppts.png" id="ppts" style="position: absolute;width: auto;margin-top: 30px;margin-left:750px;height: 325px;">
+	  <button id="step2" onclick="step2();" style="position: absolute;width: 100px;height: 300px;margin-top: 60px;margin-left:810px;border: none;background: none;">
+		</button>
+
+		<img src="imgs1/ppt.png" id="ppt" class="dsphdd" style="position: absolute; top: 110px;left: 775px; height: 315px;">
+	  <button id="step3" onclick="step3();" style="position: absolute;width: 55px;height: 75px;margin-top: 15px;margin-left:750px;border: none;background: none;">
+		</button>
+	  
+	  
+	  <span id="Subred" class="red dsphdd" style="position: absolute;color: #555;padding: 1px;margin-top: 100px;margin-left: 492px;transform: rotate(270deg);width: 55px;">28</span>
+	  <span id="Tbfred" class="red dsphdd" style="position: absolute;color: #555;padding: 1px;margin-top: 105px;margin-left: 368px;transform: rotate(270deg);width: 55px;">28</span>
+	  <span id="Bfrred" class="red dsphdd" style="position: absolute;color: #555;padding: 1px;margin-top: 80px;margin-left: 625px;transform: rotate(270deg);width: 55px;">28</span>
+	  <span id="Pptred" class="red dsphdd" style="position: absolute;color: #555;padding: 1px;margin-top: 87px;margin-left: 745px;transform: rotate(270deg);width: 55px;">28</span>
+
+
+	  <span id="lb1" style="background-color: #555;color: #fff;padding: 5px;position: absolute;margin-top: 360px;margin-left: 25px;">Substrate of different concentration <br>(s6, s5, s4, s3, s2, s1)</span>
+		<span id="lb2" style="background-color: #555;color: #fff;padding: 5px;position: absolute;margin-left: 450px;margin-top: 360px;">Substrate Solution<br><i>(M. lysodeikticus).</i></span>
+		<span id="lb3" style="background-color: #555;color: #fff;padding: 5px;position: absolute;margin-left: 605px;margin-top: 365px;">Phosphate Buffer<br>(pH ~7.2)</span>
+		<span id="lb4" style="background-color: #555;color: #fff;padding: 5px;position: absolute;margin-left: 775px;margin-top: 360px;">Micro Pipettes</span>
+
+
+	  
+    </div>
+</div>
+
+
+<script>
+
+var step=0;
+
+function step1()
+{
+	$("#sol0").removeClass("dsphdd");
+	$("#sol").addClass("dsphdd");
+	$("#tbnf").removeClass("dsphdd");
+	$("#masteps").text("Now, click on micropipette.");
+	step=1;
+}
+
+function step2()
+{
+	if (step==1) 
+	{
+		$("#pptsn").removeClass("dsphdd");
+		$("#ppts").addClass("dsphdd");
+		$("#ppt").removeClass("dsphdd");
+		$("#masteps").text("Set the micropipette to 5 µL by clicking on wheel to measure the substrate.");
+		
+		step=2;
+	}
+}
+
+function step3()
+{
+	if (step==2) 
+	{
+		$("#Pptred").removeClass("dsphdd");
+		$("#Pptred").text("05");
+		$("#masteps").text("Now, click on the substrate solution bottle to dispense 5 µL of substrate into the microcentrifuge tubes.");
+		step=3;
+	}
+	else if (step==4) 
+	{
+		$("#Pptred").removeClass("dsphdd");
+		$(".red").text("995");
+		$("#masteps").text("Now, click on the buffer solution beaker to dispense 995 µL of buffer into the microcentrifuge tubes, creating a 1 mL substrate solution with a 0.5 mM concentration (as shown in table).");
+		step=5;
+	}
+}
+function step4()
+{
+	if (step==3) 
+	{
+		$("#subO").removeClass("dsphdd");
+		$("#subC").addClass("dsphdd");
+		setTimeout(function() {
+      $("#Pptred").addClass("dsphdd");
+      $("#ppt").addClass("dsphdd");
+    }, 800);
+    setTimeout(function() {
+      $("#subDW").removeClass("dsphdd");
+      $("#Subred").removeClass("dsphdd");
+      $("#Subred").text("05");
+    }, 1600);
+    setTimeout(function() {
+    	$("#subUP").removeClass("dsphdd");
+      $("#subDW").addClass("dsphdd");
+    }, 2400);
+    setTimeout(function() {
+      $("#subUP").addClass("dsphdd");
+      $("#Subred").addClass("dsphdd");
+    }, 3200);
+    setTimeout(function() {
+      $("#tbffUP").removeClass("dsphdd");
+      $("#Tbfred").removeClass("dsphdd");
+      $("#Tbfred").text("05");
+    }, 4000);
+    setTimeout(function() {
+      $("#tbffUP").addClass("dsphdd");
+      $("#tbffDW").removeClass("dsphdd");
+      $("#tbnf").addClass("dsphdd");
+      $("#tbhf").removeClass("dsphdd");
+    }, 4800);
+    setTimeout(function() {
+      $("#tbffDW").addClass("dsphdd");
+      $("#Tbfred").addClass("dsphdd");
+      $(".red").text("");
+    }, 5600);
+    setTimeout(function() {
+      $("#ppt").removeClass("dsphdd");
+      $("#masteps").text("Now set the micropipette to 995 µL by clicking on wheel to measure the buffer solution.");
+    }, 6400);
+	  step=4;
+	}
+}
+
+
+function step5()
+{
+	if (step==5) 
+	{
+
+    $("#Pptred").addClass("dsphdd");
+    $("#ppt").addClass("dsphdd");
+    setTimeout(function() {
+      $("#bfrDW").removeClass("dsphdd");
+      $("#Bfrred").removeClass("dsphdd");
+      // $("#Subred").text("05");
+    }, 800);
+    setTimeout(function() {
+    	$("#bfrUP").removeClass("dsphdd");
+      $("#bfrDW").addClass("dsphdd");
+    }, 1600);
+    setTimeout(function() {
+      $("#bfrUP").addClass("dsphdd");
+      $("#Bfrred").addClass("dsphdd");
+    }, 2400);
+    setTimeout(function() {
+      $("#tbffUP").removeClass("dsphdd");
+      $("#Tbfred").removeClass("dsphdd");
+      // $("#Tbfred").text("05");
+    }, 3200);
+    setTimeout(function() {
+      $("#tbffUP").addClass("dsphdd");
+      $("#tbffDW").removeClass("dsphdd");
+      $("#tbhf").addClass("dsphdd");
+      $("#tbff").removeClass("dsphdd");
+    }, 4000);
+    setTimeout(function() {
+      $("#tbffDW").addClass("dsphdd");
+      $("#Tbfred").addClass("dsphdd");
+      $(".red").text("");
+    }, 4800);
+    setTimeout(function() {
+      $("#ppt").removeClass("dsphdd");
+      $("#record").removeClass("dsphdd");
+      $("#masteps").text("Now, click on the Run button to generate the remaining substrate samples with different concentrations as per the table.");
+    }, 5600);
+	  step=6;
+	}
+}
+
+
+
+
+
+let TestData = [
+    [10, 990],
+    [20, 980],
+    [40, 960],
+    [80, 920],
+    [160, 840]
+];
+
+
+
+function record() {
+	$("#sol").addClass("dsphdd");
+    for (let i = 0; i < TestData.length; i++) 
+    {
+        (function(i) {
+            setTimeout(function() {
+                // Initial setup
+            	$("#tbff").addClass("dsphdd");
+            	$("#tbnf").removeClass("dsphdd");
+            	$("#sol" + (i)).addClass("dsphdd");
+            	$("#sol" + (i + 1)).removeClass("dsphdd");
+					    setTimeout(function() {
+					    	$("#Pptred").removeClass("dsphdd");
+					    	$(".red").text(TestData[i][0]);
+					    }, 800);
+					    setTimeout(function() {
+					    	$("#ppt").addClass("dsphdd");
+					    	$("#Pptred").addClass("dsphdd");
+					    }, 1600);
+					    setTimeout(function() {
+					      $("#subDW").removeClass("dsphdd");
+					      $("#Subred").removeClass("dsphdd");
+					    }, 2400);
+					    setTimeout(function() {
+					    	$("#subUP").removeClass("dsphdd");
+					      $("#subDW").addClass("dsphdd");
+					    }, 3200);
+					    setTimeout(function() {
+					      $("#subUP").addClass("dsphdd");
+					      $("#Subred").addClass("dsphdd");
+					    }, 4000);
+					    setTimeout(function() {
+					      $("#tbffUP").removeClass("dsphdd");
+					      $("#Tbfred").removeClass("dsphdd");
+					    }, 4800);
+					    setTimeout(function() {
+					      $("#tbffUP").addClass("dsphdd");
+					      $("#tbffDW").removeClass("dsphdd");
+					      $("#tbnf").addClass("dsphdd");
+					      $("#tbhf").removeClass("dsphdd");
+					    }, 5600);
+					    setTimeout(function() {
+					      $("#tbffDW").addClass("dsphdd");
+					      $("#Tbfred").addClass("dsphdd");
+					      $(".red").text("");
+					    }, 6400);
+					    setTimeout(function() {
+					      $("#ppt").removeClass("dsphdd");
+					    }, 7200);
+					    setTimeout(function() {
+					      $("#Pptred").removeClass("dsphdd");
+						    $(".red").text(TestData[i][1]);
+					    }, 8000);
+					    setTimeout(function() {
+						    $("#ppt").addClass("dsphdd");
+						    $("#Pptred").addClass("dsphdd");
+					    }, 8800);
+					    setTimeout(function() {
+					      $("#bfrDW").removeClass("dsphdd");
+					      $("#Bfrred").removeClass("dsphdd");
+					    }, 9600);
+					    setTimeout(function() {
+					    	$("#bfrUP").removeClass("dsphdd");
+					      $("#bfrDW").addClass("dsphdd");
+					    }, 10400);
+					    setTimeout(function() {
+					      $("#bfrUP").addClass("dsphdd");
+					      $("#Bfrred").addClass("dsphdd");
+					    }, 11200);
+					    setTimeout(function() {
+					      $("#tbffUP").removeClass("dsphdd");
+					      $("#Tbfred").removeClass("dsphdd");
+					      // $("#Tbfred").text("05");
+					    }, 12000);
+					    setTimeout(function() {
+					      $("#tbffUP").addClass("dsphdd");
+					      $("#tbffDW").removeClass("dsphdd");
+					      $("#tbhf").addClass("dsphdd");
+					      $("#tbff").removeClass("dsphdd");
+					    }, 12800);
+					    setTimeout(function() {
+					      $("#tbffDW").addClass("dsphdd");
+					      $("#Tbfred").addClass("dsphdd");
+					      $(".red").text("");
+					    }, 13600);
+					    setTimeout(function() {
+					      $("#ppt").removeClass("dsphdd");
+					      $("#record").addClassClass("dsphdd");
+					    }, 14400);
+            //XXXXXXXXXXXXXXXXX
+            }, i * 15200); // Delay in milliseconds (27,200 ms)
+
+            setTimeout(() => {
+	        	$("#sol" + (i + 1)).addClass("dsphdd");
+	          $("#sol" + (i + 2)).removeClass("dsphdd");
+	          $("#tbff").addClass("dsphdd");
+	          $("#ppt").addClass("dsphdd");
+	          $("#pptsn").addClass("dsphdd");
+	          $("#ppts").removeClass("dsphdd");
+	          $("#masteps").text("To proceed further, click on the next step.");
+						$("#nextstep").css("visibility","visible");
+	                }, 76000);
+
+        })(i);
+        
+
+    }
+}
+
+
+
+
+
+</script>
+
+<script src="../assets/js/iframeResize.js"></script>
+        
+        </body>
+</html>
+
+
+
+

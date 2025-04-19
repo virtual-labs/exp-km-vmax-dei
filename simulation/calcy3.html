@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Michaelis-Menten Plot</title>
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/custom.css">
+    
+    <!-- jQuery and Bootstrap JS -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/math-eq.js"></script>
+    <script src="js/chart.js"></script>
+    <style type="text/css">
+        .zero {
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="row zero">
+    <div id="main">
+        <div id="myhead">
+            <p id="masteps">
+                Michaelis-Menten Plot
+            </p>
+        </div>
+        <hr>
+
+        <div class="form-group">
+            <h5 style="text-align: left;">Enter absorbance readings for known concentrations</h5>
+            <div id="inputContainer">
+                <div class="row lg-12 zero">
+                    <div class="col-lg-3">
+                        <input type="number" step="0.01" class="form-control concentration" placeholder="Concentration (S)" required>
+                    </div>
+                    <div class="col-lg-9">
+                        <input type="number" step="0.01" class="form-control velocity" placeholder="Initial Velocity (V0)" required>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group" style="margin-top: 10px; margin-left: 15px;">
+            <button id="addButton" class="btn btn-primary">+ Add More</button>
+            <hr>
+        </div>
+        <div class="form-group mt-2">
+            <button id="plotButton" class="btn btn-success">Plot Graph</button>
+        </div>
+
+        <canvas id="michaelisMentenChart" width="400" height="200" style="margin-left: 55px;"></canvas>
+        <div id="results">
+        <h3>Results:</h3>
+        <p><b>Vmax:</b> <span id="vmax"></span></p>
+        <p><b>Km:</b> <span id="km"></span></p>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById('addButton').addEventListener('click', () => {
+        const inputContainer = document.getElementById('inputContainer');
+        const row = document.createElement('div');
+        row.classList.add('row', 'mb-2', 'zero');
+        row.innerHTML = `
+            <div class="col-lg-3">
+                <input type="number" step="0.01" class="form-control concentration" placeholder="Concentration (S)" required>
+            </div>
+            <div class="col-lg-9">
+                <input type="number" step="0.01" class="form-control velocity" placeholder="Initial Velocity (V0)" required>
+            </div>
+        `;
+        inputContainer.appendChild(row);
+    });
+
+    document.getElementById('plotButton').addEventListener('click', () => {
+        const concentrations = Array.from(document.getElementsByClassName('concentration')).map(input => parseFloat(input.value)).filter(val => !isNaN(val));
+        const velocities = Array.from(document.getElementsByClassName('velocity')).map(input => parseFloat(input.value)).filter(val => !isNaN(val));
+
+        const reciprocalS = concentrations.map(s => 1 / s);
+        const reciprocalV = velocities.map(v => 1 / v);
+
+        function linearRegression(x, y) {
+            const n = x.length;
+            const sumX = x.reduce((a, b) => a + b, 0);
+            const sumY = y.reduce((a, b) => a + b, 0);
+            const sumXY = x.reduce((acc, val, i) => acc + val * y[i], 0);
+            const sumX2 = x.reduce((acc, val) => acc + val * val, 0);
+
+            const slope = (n * sumXY - sumX * sumY) / (n * sumX2 - sumX * sumX);
+            const intercept = (sumY - slope * sumX) / n;
+
+            return { slope, intercept };
+        }
+
+        const { slope, intercept } = linearRegression(reciprocalS, reciprocalV);
+
+        const Vmax = 1 / intercept;
+        const Km = slope * Vmax;
+
+        document.getElementById('results').innerHTML = `Vmax: ${Vmax.toFixed(5)} Abs/sec, Km: ${Km.toFixed(2)} mM`;
+
+        const smoothS = [];
+        const smoothV = [];
+        for (let s = 0; s <= Math.max(...concentrations) + 5; s += 0.1) {
+            smoothS.push(s);
+            smoothV.push((Vmax * s) / (Km + s));
+        }
+
+        const ctxMM = document.getElementById('michaelisMentenChart').getContext('2d');
+        new Chart(ctxMM, {
+            type: 'scatter',
+            data: {
+                datasets: [
+                    {
+                        label: 'Experimental Data',
+                        data: concentrations.map((s, i) => ({ x: s, y: velocities[i] })),
+                        borderColor: 'red',
+                        backgroundColor: 'red',
+                        pointRadius: 6,
+                        showLine: false
+                    },
+                    {
+                        label: `Fit Curve: Vmax=${Vmax.toFixed(5)}, Km=${Km.toFixed(2)}`,
+                        data: smoothS.map((s, i) => ({ x: s, y: smoothV[i] })),
+                        borderColor: 'black',
+                        borderWidth: 2,
+                        pointRadius: 0,
+                        tension: 0.4,
+                        type: 'line',
+                        fill: false
+                    },
+                    {
+                        label: 'Vmax Line',
+                        data: [
+                            { x: 0, y: Vmax },
+                            { x: Math.max(...concentrations) + 5, y: Vmax }
+                        ],
+                        borderColor: 'blue',
+                        borderWidth: 2,
+                        pointRadius: 0,
+                        type: 'line',
+                        fill: false,
+                        borderDash: [5, 5]
+                    },
+                    {
+                        label: 'Km Line',
+                        data: [
+                            { x: Km, y: 0 },
+                            { x: Km, y: Vmax / 2 }
+                        ],
+                        borderColor: 'green',
+                        borderWidth: 2,
+                        pointRadius: 0,
+                        type: 'line',
+                        fill: false,
+                        borderDash: [5, 5]
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { display: true }
+                },
+                scales: {
+                    x: {
+                        title: { display: true, text: '[S] (mM)' },
+                        ticks: { color: 'black' },
+                        grid: { color: '#ccc' },
+                        max: Math.max(...concentrations) + 5
+                    },
+                    y: {
+                        title: { display: true, text: 'V₀ (Abs/sec)' },
+                        ticks: { color: 'black' },
+                        grid: { color: '#ccc' },
+                        max: Vmax + 0.001 // Slightly higher than Vmax for better visualization
+                    }
+                }
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
