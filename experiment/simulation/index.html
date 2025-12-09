@@ -24,15 +24,15 @@
 <body>
 
 <div class="row zero">
-    <div id="main"> 
-      <div id="myhead"><p id="masteps"> The first step is the preparation of substrate solutions of different concentrations <a href="table1.html" target="_blank">( See Table )</a>. For this, click on the rack of microcentrifuge tubes.</p> <a id="nextstep" class="btn btn-success" href="step2.html"> Next Step</a>
-      </div>
-      <hr>
+		<div id="leftPanel">
+			<button onclick=location.reload(); class="btn btn-warning" style="width:225px;margin-bottom: 15px;">Reset</button>
+			<p id="masteps"> The first step is the preparation of substrate solutions of different concentrations <a href="table1.html" target="_blank">( See Table )</a>. For this, click on the rack of microcentrifuge tubes.</p> <a id="nextstep" class="btn btn-success" href="step2.html"> Next Step</a>
+		</div>
+		<div id="main"> 
+    <button class="btn btn-success dsphdd" id="record" onclick="record();" style="padding: 15px;position: absolute;margin-top: 10px;margin-left: 10px;width: 100px;">Run</button>
 
-    <button class="btn btn-success dsphdd" id="record" onclick="record();" style="padding: 15px;position: absolute;margin-top: 10px;margin-left: 10px;">Run</button>
-
-    <button id="step1" onclick="step1();" style="position: absolute;width: auto;margin-top: 267px;border: none;background: none;">
-    <img src="imgs1/sol.png" id="sol" style="position: absolute;width: 350px;">
+    <button id="step1" onclick="step1();" style="position: absolute;margin-top: 305px;border: none;background-color: transparent;height: 90px;">
+    <img src="imgs1/sol.png"  id="sol" style="position: absolute;width: 350px;">
     <img src="imgs1/sol0.png" id="sol0" class="dsphdd" style="position: absolute;width: 350px;">
     <img src="imgs1/sol1.png" id="sol1" class="dsphdd" style="position: absolute;width: 350px;">
     <img src="imgs1/sol2.png" id="sol2" class="dsphdd" style="position: absolute;width: 350px;">
@@ -42,45 +42,45 @@
     <img src="imgs1/sol6.png" id="sol6" class="dsphdd" style="position: absolute;width: 350px;">
     </button>
 
-    <img src="imgs1/tbnf.png" id="tbnf" class="dsphdd" style="position: absolute; top: 327px;left: 425px; height: 135px;">
-    <img src="imgs1/tbhf.png" id="tbhf" class="dsphdd" style="position: absolute; top: 327px;left: 425px; height: 135px;">
-    <img src="imgs1/tbff.png" id="tbff" class="dsphdd" style="position: absolute; top: 327px;left: 425px; height: 135px;">
-    <img src="imgs1/pptu.png" id="tbffUP" class="dsphdd" style="position: absolute; top: 137px;left: 401px; height: 315px;">
-	  <img src="imgs1/pptd.png" id="tbffDW" class="dsphdd" style="position: absolute; top: 137px;left: 401px; height: 315px;">
+    <img src="imgs1/tbnf.png" id="tbnf" class="dsphdd" style="position: absolute; margin-top: 300px;margin-left: 385px; height: 135px;">
+    <img src="imgs1/tbhf.png" id="tbhf" class="dsphdd" style="position: absolute; margin-top: 300px;margin-left: 385px; height: 135px;">
+    <img src="imgs1/tbff.png" id="tbff" class="dsphdd" style="position: absolute; margin-top: 300px;margin-left: 385px; height: 135px;">
+    <img src="imgs1/pptu.png" id="tbffUP" class="dsphdd" style="position: absolute; margin-top: 111px;margin-left: 358px; height: 315px;">
+	  <img src="imgs1/pptd.png" id="tbffDW" class="dsphdd" style="position: absolute; margin-top: 111px;margin-left: 358px; height: 315px;">
 
-	  <img src="imgs1/subC.png" id="subC"  style="position: absolute; top: 302px;left: 525px;height: 175px;">
-	  <img src="imgs1/subO.png" id="subO" class="dsphdd" style="position: absolute; top: 302px;left: 525px;height: 175px;">
-	  <img src="imgs1/pptux.png" id="subUP" class="dsphdd" style="position: absolute; top: 125px;left: 523px; width: 75px;">
-	  <img src="imgs1/pptdx.png" id="subDW" class="dsphdd" style="position: absolute; top: 125px;left: 523px; width: 75px;">
-	  <button id="step4" onclick="step4();" style="position: absolute;width: 90px;height: 150px;margin-top: 200px;margin-left:475px;border:none ;background: none">
+	  <img src="imgs1/subC.png" id="subC"  style="position: absolute; margin-top: 265px;margin-left: 465px;height: 175px;">
+	  <img src="imgs1/subO.png" id="subO" class="dsphdd" style="position: absolute; margin-top: 265px;margin-left: 465px;height: 175px;">
+	  <img src="imgs1/pptux.png" id="subUP" class="dsphdd" style="position: absolute; margin-top: 87px;margin-left: 463px; width: 75px;">
+	  <img src="imgs1/pptdx.png" id="subDW" class="dsphdd" style="position: absolute; margin-top: 87px;margin-left: 463px; width: 75px;">
+	  <button id="step4" onclick="step4();" style="position: absolute;width: 90px;height: 150px;margin-top: 290px;margin-left:465px;border:none ;background: transparent;">
     </button>
 
-	  <img src="imgs1/bfr.png" id="bfr" style="position: absolute; top: 325px;left: 635px; height: 155px;">
-	  <img src="imgs1/pptu.png" id="bfrUP" class="dsphdd" style="position: absolute; top: 109px;left: 657px; height: 315px;">
-	  <img src="imgs1/pptd.png" id="bfrDW" class="dsphdd" style="position: absolute; top: 109px;left: 657px; height: 315px;">
-	  <button id="step5" onclick="step5();" style="position: absolute;width: 135px;height: 150px;margin-top: 210px;margin-left:590px;border:none;background: none;">
+	  <img src="imgs1/bfr.png" id="bfr" style="position: absolute; margin-top: 283px;margin-left: 590px; height: 155px;">
+	  <img src="imgs1/pptu.png" id="bfrUP" class="dsphdd" style="position: absolute; margin-top: 68px;margin-left: 620px; height: 315px;">
+	  <img src="imgs1/pptd.png" id="bfrDW" class="dsphdd" style="position: absolute; margin-top: 68px;margin-left: 620px; height: 315px;">
+	  <button id="step5" onclick="step5();" style="position: absolute;width: 135px;height: 150px;margin-top: 290px;margin-left:595px;border:none;background: transparent;">
     </button> 
 
-	  <img src="imgs1/pptsn.png" id="pptsn" class="dsphdd" style="position: absolute;width: auto;margin-top: 30px;margin-left:750px;height: 325px;">
-	  <img src="imgs1/ppts.png" id="ppts" style="position: absolute;width: auto;margin-top: 30px;margin-left:750px;height: 325px;">
+	  <img src="imgs1/pptsn.png" id="pptsn" class="dsphdd" style="position: absolute;width: auto;margin-top: 115px;margin-left:750px;height: 325px;">
+	  <img src="imgs1/ppts.png" id="ppts" style="position: absolute;width: auto;margin-top: 115px;margin-left:750px;height: 325px;">
 	  <button id="step2" onclick="step2();" style="position: absolute;width: 100px;height: 300px;margin-top: 60px;margin-left:810px;border: none;background: none;">
 		</button>
 
-		<img src="imgs1/ppt.png" id="ppt" class="dsphdd" style="position: absolute; top: 110px;left: 775px; height: 315px;">
+		<img src="imgs1/ppt.png" id="ppt" class="dsphdd" style="position: absolute; margin-top: 10px;margin-left: 700px; height: 315px;">
 	  <button id="step3" onclick="step3();" style="position: absolute;width: 55px;height: 75px;margin-top: 15px;margin-left:750px;border: none;background: none;">
 		</button>
 	  
 	  
-	  <span id="Subred" class="red dsphdd" style="position: absolute;color: #555;padding: 1px;margin-top: 100px;margin-left: 492px;transform: rotate(270deg);width: 55px;">28</span>
-	  <span id="Tbfred" class="red dsphdd" style="position: absolute;color: #555;padding: 1px;margin-top: 105px;margin-left: 368px;transform: rotate(270deg);width: 55px;">28</span>
-	  <span id="Bfrred" class="red dsphdd" style="position: absolute;color: #555;padding: 1px;margin-top: 80px;margin-left: 625px;transform: rotate(270deg);width: 55px;">28</span>
-	  <span id="Pptred" class="red dsphdd" style="position: absolute;color: #555;padding: 1px;margin-top: 87px;margin-left: 745px;transform: rotate(270deg);width: 55px;">28</span>
+	  <span id="Subred" class="red dsphdd" style="position: absolute;color: #555;padding: 1px;margin-top: 180px;margin-left: 483px;transform: rotate(270deg);width: 55px;">28</span>
+	  <span id="Tbfred" class="red dsphdd" style="position: absolute;color: #555;padding: 1px;margin-top: 200px;margin-left: 377px;transform: rotate(270deg);width: 55px;">28</span>
+	  <span id="Bfrred" class="red dsphdd" style="position: absolute;color: #555;padding: 1px;margin-top: 158px;margin-left: 640px;transform: rotate(270deg);width: 55px;">28</span>
+	  <span id="Pptred" class="red dsphdd" style="position: absolute;color: #555;padding: 1px;margin-top: 106px;margin-left: 720px;transform: rotate(270deg);width: 55px;">28</span>
 
 
-	  <span id="lb1" style="background-color: #555;color: #fff;padding: 5px;position: absolute;margin-top: 360px;margin-left: 25px;">Substrate of different concentration <br>(s6, s5, s4, s3, s2, s1)</span>
-		<span id="lb2" style="background-color: #555;color: #fff;padding: 5px;position: absolute;margin-left: 450px;margin-top: 360px;">Substrate Solution<br><i>(M. lysodeikticus).</i></span>
-		<span id="lb3" style="background-color: #555;color: #fff;padding: 5px;position: absolute;margin-left: 605px;margin-top: 365px;">Phosphate Buffer<br>(pH ~7.2)</span>
-		<span id="lb4" style="background-color: #555;color: #fff;padding: 5px;position: absolute;margin-left: 775px;margin-top: 360px;">Micro Pipettes</span>
+	  <span id="lb1" style="background-color: #555;color: #fff;padding: 5px;position: absolute;margin-top: 450px;margin-left: 25px;">Substrate of different concentration <br>(s6, s5, s4, s3, s2, s1)</span>
+		<span id="lb2" style="background-color: #555;color: #fff;padding: 5px;position: absolute;margin-left: 450px;margin-top: 450px;">Substrate Solution<br><i>(M. lysodeikticus).</i></span>
+		<span id="lb3" style="background-color: #555;color: #fff;padding: 5px;position: absolute;margin-left: 605px;margin-top: 450px;">Phosphate Buffer<br>(pH ~7.2)</span>
+		<span id="lb4" style="background-color: #555;color: #fff;padding: 5px;position: absolute;margin-left: 775px;margin-top: 450px;">Micro Pipettes</span>
 
 
 	  
@@ -327,7 +327,7 @@ function record() {
 					      $("#ppt").removeClass("dsphdd");
 					      $("#record").addClassClass("dsphdd");
 					    }, 14400);
-            //XXXXXXXXXXXXXXXXX
+            //dsphdddsphdddsphdddsphdddsphddXX
             }, i * 15200); // Delay in milliseconds (27,200 ms)
 
             setTimeout(() => {
