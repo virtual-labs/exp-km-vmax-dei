@@ -69,7 +69,7 @@ To determine Km and Vmax, experimental data is plotted using different methods:
 - Reaction rate increases with enzyme concentration only if substrate is available in excess.
 
 3. **pH and Temperature:**
-- Lysozyme has an optimal activity at pH (~6.2) and temperature (~37&deg;C). 
+- Lysozyme has an optimal activity at pH (&tilde;6.2) and temperature (&tilde;37&deg;C). 
 - Deviations from optimal conditions can lead to reduced enzymatic activity.
 - Extreme pH levels can alter the enzyme's active site conformation, affecting substrate binding and catalytic efficiency.
 - High temperatures may cause enzyme denaturation, leading to structural unfolding and loss of function.
