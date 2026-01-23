@@ -43,14 +43,14 @@
 <body>
 
 <div class="row zero">
-    <div id="main"> 
-      <div id="myhead"><p id="masteps"> We prepare a mixture of substrate and solutions as described in the previous step(<a href="table3.html">See Table</a>) and begin taking absorbance readings immediately after adding lysozyme. To do this, click on the spectrometer lid to open it.</p> <a id="nextstep" class="btn btn-success" href="calculator.html"> Next Step</a>
-      </div>
-      <hr>
-
-    <img src="imgs3/septC.png" id="septC" style="position: absolute; top: 235px; width: 350px;">
-    <img src="imgs3/septO.png" class="dsphdd" id="septO" style="position: absolute; top: 235px; width: 350px;">
-    <img src="imgs3/septF.png" class="dsphdd" id="septF" style="position: absolute; top: 235px; width: 350px;">
+		<div id="leftPanel">
+			<button onclick=location.reload(); class="btn btn-warning" style="width:225px;margin-bottom: 15px;">Reset</button>
+			<p id="masteps">We prepare a mixture of substrate and solutions as described in the previous step(<a href="table3.html">See Table</a>) and begin taking absorbance readings immediately after adding lysozyme. To do this, click on the spectrometer lid to open it.</p> <a id="nextstep" class="btn btn-success" href="calculator.html"> Next Step</a>
+		</div>
+		<div id="main"> 
+    <img src="imgs3/septC.png" id="septC" style="position: absolute; margin-top: 115px; width: 350px;">
+    <img src="imgs3/septO.png" class="dsphdd" id="septO" style="position: absolute; margin-top: 115px; width: 350px;">
+    <img src="imgs3/septF.png" class="dsphdd" id="septF" style="position: absolute; margin-top: 115px; width: 350px;">
     <span id="CpHval" style="position: absolute;color: #555;padding: 1px;margin-top: 149px;margin-left: 200px;width: 155px;"></span>
     
     <button id="stepR" onclick="step5();" style="position: absolute;width: 60px;height: 20px;margin-left: 190px; margin-top: 217px;border:none;background:none;">
@@ -63,8 +63,9 @@
 	  </button>
     
 	  
-	  <img src="imgs3/cu3.png" id="cu3" style="position: absolute; top: 295px;left: 500px; height: 150px;">
+	  
 	  <button id="stepCU" onclick="step2();" style="position: absolute;width: 50px;height: 150px;margin-left: 450px; margin-top: 170px;border:none;background:none;">
+	  	<img src="imgs3/cu3.png" id="cu3" style="height: 150px;">
 	  </button>
 
 	  <span id="eths1" style="background-color: #555;color: #fff;padding: 5px;position: absolute;margin-top: 335px;margin-left: 20px;">Spectrometer</span>
